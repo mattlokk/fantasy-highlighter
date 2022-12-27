@@ -34,7 +34,7 @@ function highlightPosts() {
           var found = false;
           if (p[i].className === "title") {
             for (var j = 0; j < players.length; j++) {
-              if (p[i].textContent.toLowerCase().indexOf(players[j].name.toLowerCase()) > -1) {
+              if (p[i].textContent.toLowerCase().indexOf(players[j].name.toLowerCase()) > -1 && players[j].active) {
                 found = true;
               }
             }

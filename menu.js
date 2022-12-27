@@ -91,15 +91,11 @@ function deleteValue(e){
 
 function changeActive(e){
     var id = e.target.id.substring(3);
-    alert(id + ":" + e.target.checked);
     var indexToRemove;
     for (var i = 0; i < players.length; i++){
         if (players[i].id == id){
-            indexToRemove = i;
+            players[i].active = !players[i].active;
         }
-    }
-    if (indexToRemove){
-        players.splice(i, 1);
     }
     chrome.storage.sync.set({ players: players });
 }
