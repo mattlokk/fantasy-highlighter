@@ -52,7 +52,8 @@ function keyPress(e){
 
 function addNewValue(){
     var txtNewValue = document.getElementById('txtNewValue');
-    var newValue = txtNewValue.value;
+    var newId = (players.length === 0)? "1" : Math.floor(players[players.length -1].id) + 1;
+    var newValue = { name: txtNewValue.value, active: true, id: newId};
     players.push(newValue);
     addValueToList(newValue);    
     txtNewValue.value = "";
@@ -61,18 +62,44 @@ function addNewValue(){
 
 function addValueToList(value){
     var li = document.createElement("li");
-    li.textContent = value;
     var del = document.createElement("button");
     del.textContent = "X";
-    del.addEventListener('click', function(e){
-        var child = e.target.parentNode;
-        var parent = child.parentNode;
-        var index = Array.prototype.indexOf.call(parent.children, child);
-
-        parent.removeChild(child);
-        players.splice(index, 1);
-        chrome.storage.sync.set({ players: players });
-    });
+    del.addEventListener('click', deleteValue);
+    var chk = document.createElement("input");
+    chk.type = "checkbox";
+    chk.id = "chk" + value.id;
+    chk.checked = value.active;
+    chk.addEventListener('change', changeActive)
+    li.append(chk);
+    var name = document.createElement("label");
+    name.textContent = value.name;
+    name.htmlFor = "chk" + value.id;
+    li.append(name);
     li.appendChild(del);
     playerList.appendChild(li);
+}
+
+function deleteValue(e){
+    var child = e.target.parentNode;
+    var parent = child.parentNode;
+    var index = Array.prototype.indexOf.call(parent.children, child);
+
+    parent.removeChild(child);
+    players.splice(index, 1);
+    chrome.storage.sync.set({ players: players });
+}
+
+function changeActive(e){
+    var id = e.target.id.substring(3);
+    alert(id + ":" + e.target.checked);
+    var indexToRemove;
+    for (var i = 0; i < players.length; i++){
+        if (players[i].id == id){
+            indexToRemove = i;
+        }
+    }
+    if (indexToRemove){
+        players.splice(i, 1);
+    }
+    chrome.storage.sync.set({ players: players });
 }
