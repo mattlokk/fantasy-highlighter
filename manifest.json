@@ -9,12 +9,16 @@
         "scripts/content.js"
       ],
       "matches": [
-        "https://*.reddit.com/r/fantasyfootball/*",
-        "https://*.reddit.com/r/nfl/*"
+        "https://*.reddit.com/r/baseball/*",
+        "https://*.reddit.com/r/fantasybaseball/*",
+        "https://*.reddit.com/r/nba/*",
+        "https://*.reddit.com/r/fantasybball/*",
+        "https://*.reddit.com/r/nfl/*",
+        "https://*.reddit.com/r/fantasyfootball/*"
       ]
     }
   ],
-  "description": "Highlights posts on /r/FantasyFootball",
+  "description": "Highlights posts on sports-related subreddits",
   "icons": {
     "16": "images/icon-16.png",
     "32": "images/icon-32.png",
@@ -22,9 +26,9 @@
     "128": "images/icon-128.png"
   },
   "manifest_version": 3,
-  "name": "FF-Highlighter",
+  "name": "Fantasy-Highlighter",
   "permissions": [
     "storage"
   ],
-  "version": "1.0"
+  "version": "1.1"
 }
